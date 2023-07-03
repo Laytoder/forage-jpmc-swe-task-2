@@ -31,6 +31,7 @@ class App extends Component<{}, IState> {
    * Render Graph react component with state.data parse as property data
    */
   renderGraph() {
+    // show the graph when the state to showGraph is true
     if (this.state.showGraph) return <Graph data={this.state.data} />;
   }
 
@@ -41,15 +42,15 @@ class App extends Component<{}, IState> {
     let x = 0;
     const interval = setInterval(() => {
       DataStreamer.getData((serverResponds: ServerRespond[]) => {
-        // Update the state by creating a new array of data that consists of
-        // Previous data in the state and the new data from server
+        // Update the state with new data from the server
         this.setState({
           data: serverResponds,
           showGraph: true,
         });
       });
       x++;
-      if (x > 100) clearInterval(interval);
+      // Stop streaming after 100 seconds
+      if (x > 1000) clearInterval(interval);
     }, 100);
   }
 

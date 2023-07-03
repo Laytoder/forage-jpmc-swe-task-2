@@ -37,10 +37,16 @@ class Graph extends Component<IProps, {}> {
     )[0] as unknown) as PerspectiveViewerElement;
 
     // Adding graph element attributes
+
+    // enable continuous line graph
     elem.setAttribute("view", "y_line");
+    // seperate different stocks as a different line in the graph
     elem.setAttribute("column-pivots", '["stock"]');
+    // use timestamp data points on the x axis
     elem.setAttribute("row-pivots", '["timestamp"]');
+    // use top_ask_price data points on the y axis
     elem.setAttribute("columns", '["top_ask_price"]');
+    // ensure no duplicate data
     elem.setAttribute(
       "aggregates",
       `
